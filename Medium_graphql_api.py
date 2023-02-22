@@ -28,7 +28,7 @@ class Medium_GraphQL_Post_API:
     by Osyna
     """
         
-    def __init__(self):
+    def __init__(self,Local : bool = False):
         """
         Initializes the MediumScraper object.
         """
@@ -49,14 +49,21 @@ class Medium_GraphQL_Post_API:
         except:
             raise Exception('Medium.com or Medium CDN is down or your IP is blocked')
         
-        # Load the GraphQL Queries from the files
-        # read the file in the folder named medium_graph_ql_post_by_tag.req
-        with open('medium_graph_ql_post_by_tag.req', 'r') as f:
-            self.graph_ql_post_by_tag_query = f.read()
+        if Local:        
+            # Load the GraphQL Queries from the files
+            # read the file in the folder named medium_graph_ql_post_by_tag.req
+            with open('medium_graph_ql_post_by_tag.req', 'r') as f:
+                self.graph_ql_post_by_tag_query = f.read()
 
-        # read the file in the folder named medium_graph_ql_search.req
-        with open('medium_graph_ql_search.req', 'r') as f:
-            self.graph_ql_search_posts_query = f.read()
+            # read the file in the folder named medium_graph_ql_search.req
+            with open('medium_graph_ql_search.req', 'r') as f:
+                self.graph_ql_search_posts_query = f.read()
+        else:
+            try:
+                self.graph_ql_search_posts_query = self.session.get('https://raw.githubusercontent.com/Osyna/Medium-GraphQL-Post-API/main/medium_graph_ql_search.req').text
+                self.graph_ql_post_by_tag_query = self.session.get('https://raw.githubusercontent.com/Osyna/Medium-GraphQL-Post-API/main/medium_graph_ql_post_by_tag.req').text
+            except:
+                raise Exception('Cannot use distant req files. Please download the req files and set Local to True')
 
                
         # Define Default User Agent, can be easily changer by the user calling set_user_agent() function
@@ -329,4 +336,3 @@ class Medium_GraphQL_Post_API:
                                     post_preview_image=preview_image
                                     ))
         return Posts_list                              
-    
