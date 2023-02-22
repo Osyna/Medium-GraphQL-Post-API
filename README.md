@@ -1,7 +1,9 @@
 # Medium-GraphQL-Post-API
 > A web scraper for retrieving Medium posts using GraphQL API
 
-A Python script for retrieving Medium posts using GraphQL API. This script can be used to scrape Medium posts based on search queries or by the author's username.
+A Python script for retrieving Medium posts using GraphQL API. This script can be used to scrape Medium posts based on search queries or by the author's username. I am not affiliated with Medium and it's not an official API or python Script. I am just a fellow suscriber who wanted to centralize various sources Reddit, Twitter and Medium in a single Dashboard / News Feed.
+
+
 
 ![](header.png)
 
